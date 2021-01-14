@@ -2,11 +2,17 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"io"
+	"net"
+	"os"
+	"time"
 
 	"github.com/hajimehoshi/oto"
 
 	"github.com/hajimehoshi/go-mp3"
+
+	"github.com/tatsushid/go-fastping"
 )
 
 /*
@@ -52,14 +58,35 @@ func initSound() {
 	pingDecoder, err = mp3.NewDecoder(bytes.NewReader(pingMP3))
 }
 
-func main() {
-	initSound()
+func initPinger() *fastping.Pinger {
+	p := fastping.NewPinger()
+	ra, err := net.ResolveIPAddr("ip4:icmp", os.Args[1])
+	if err != nil {
+		panic(err)
+	}
+	p.AddIPAddr(ra)
+	p.OnRecv = func(addr *net.IPAddr, rtt time.Duration) {
+		go playPong()
+		fmt.Printf("IP Addr: %s receive, RTT: %v\n", addr.String(), rtt)
+	}
 
-	for i := 0; i < 4; i++ {
-		if i%2 == 0 {
-			playPing()
-		} else {
-			playPong()
+	return p
+}
+
+func main() {
+	if len(os.Args) != 2 {
+		fmt.Println("usage: pingsing <host/ip to ping>")
+		return
+	}
+
+	initSound()
+	pinger := initPinger()
+
+	for {
+		go playPing()
+		err := pinger.Run()
+		if err != nil {
+			fmt.Println(err)
 		}
 	}
 }
