@@ -1,7 +1,9 @@
 # pingsing
 Audible ping and pong sound on successful ICMP echo request/response. Because we all know that's what we were missing. 😉
 
-// embed youtube video here w/ping/pong noise //
+<video  style="display:block; width:100%; height:auto;" autoplay controls loop="loop">
+       <source src="{{ site.baseurl }}/pingsing_demp.mp4" type="video/mp4" />
+</video>
 
 ## Usage
 
