@@ -1,9 +1,10 @@
 # pingsing
 Audible ping and pong sound on successful ICMP echo request/response. Because we all know that's what we were missing. 😉
 
-<video  style="display:block; width:100%; height:auto;" autoplay controls loop="loop">
-       <source src="{{ site.baseurl }}/pingsing_demp.mp4" type="video/mp4" />
-</video>
+```
+![pingsing demo](pingsing_demo.gif)
+```
+
 
 ## Usage
 
