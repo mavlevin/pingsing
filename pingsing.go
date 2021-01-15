@@ -75,7 +75,7 @@ func initPinger() *fastping.Pinger {
 
 func main() {
 	if len(os.Args) != 2 {
-		fmt.Println("usage: pingsing <host/ip to ping>")
+		fmt.Println("usage: pingsing <host/ip>")
 		return
 	}
 
