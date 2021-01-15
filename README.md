@@ -1,8 +1,9 @@
 # pingsing
 Audible ping and pong sound on successful ICMP echo request/response. Because we all know that's what we were missing. 😉
 
+<center>
 ![pingsing demo](pingsing_demo.gif)
-
+</center>
 
 ## Usage
 
